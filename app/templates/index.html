@@ -1,1 +1,11 @@
-<h1> hello world</h1>
+{% extends 'components/layout.html' %} {# This is the route to my files #}
+
+<h1> WELCOME TO THE SHOP OF HORRORS</h1>
+
+{% block leftcol %}
+<img class="img-fluid" src="https://i.ibb.co/Dr0R8Wb/horror-villans-american-main-2021x-1253571.webp" alt="horror-villans-american-main-2021x-1253571" border="0">
+{% endblock leftcol %}
+
+{% block rightcol %}
+<img class="img-fluid" src="https://i.ibb.co/HNBswMf/a67a233c-fcfe-4e8e-b000-052603ddd616.jpg" alt="a67a233c-fcfe-4e8e-b000-052603ddd616" border="0">
+{% endblock rightcol %}

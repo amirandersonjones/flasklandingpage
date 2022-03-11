@@ -1,5 +1,5 @@
 #the route/controller
-#flask rountes control what content is shown on what url depending on how the user is accessing the 
+#flask routes control what content is shown on what url depending on how the user is accessing the 
 # url, what button they've pressed. etc.
 
 #the general structure of a flask route is a function with a decorator 
