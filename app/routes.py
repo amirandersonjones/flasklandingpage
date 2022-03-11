@@ -16,7 +16,8 @@ from flask import render_template
 
 @app.route('/') # this decorator says: this is a rounte of the flask app 'app with the url endpoint '/'
 def home():
-    return render_template('index.html')
+    headline= 'WELCOME TO THE SHOP OF HORRORS'
+    return render_template('index.html', headline=headline )
 # line 17 associates a python function with a url, the decorator makes the funtion on 18 a
 # flask route and ties it to 
 #the url. when the accesses the url. the python function runs.It returns a call to render template
@@ -26,8 +27,10 @@ def home():
 #create another route--> decorater@app.route('url endpoint), define a python function
 @app.route('/shopofhorrors')
 def movies():
-    return render_template('horror.html')
+    headline= 'WELCOME TO THE SHOP OF HORRORS'
+    return render_template('horror.html',headline=headline)
 
 @app.route('/shopofhorrorsactors')
 def actors():
-    return render_template('actors.html')
+    headline = 'WELCOME TO THE SHOP OF HORRORS'
+    return render_template('actors.html', headline=headline)
