@@ -1,0 +1,77 @@
+* { 
+    font-family: serif;
+}
+
+#welcomemsg{
+    color: rgb(151, 11, 11);
+    text-align: center;
+}
+
+
+
+
+
+.container {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1.5fr 1.3fr;
+    gap: 5px 6px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Header-Area"
+      "Pic1"
+      "pic2";
+  }
+  
+  .Header-Area { grid-area: Header-Area; }
+  
+  .Pic1 { grid-area: Pic1; }
+  
+  .pic2 { grid-area: pic2; }
+  
+
+
+
+
+
+.container {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 0.2fr 1.8fr; 
+    gap: 5px 6px; 
+    grid-template-areas: 
+      "Heading-Area Heading-Area"
+      "Column1 Column2"; 
+  }
+  .Heading-Area { grid-area: Heading-Area; }
+  .Column1 { grid-area: Column1; }
+  .Column2 { grid-area: Column2; }
+
+
+
+
+
+  .container {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 1.4fr 1.3fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Header-Area Header-Area Header-Area"
+      "a1 a2 a3"
+      "a4 a5 a6";
+  }
+  
+  .Header-Area { grid-area: Header-Area; }
+  
+  .a1 { grid-area: a1; }
+  
+  .a2 { grid-area: a2; }
+  
+  .a3 { grid-area: a3; }
+  
+  .a4 { grid-area: a4; }
+  
+  .a5 { grid-area: a5; }
+  
+  .a6 { grid-area: a6; }
+  

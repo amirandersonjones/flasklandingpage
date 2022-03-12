@@ -1,0 +1,8 @@
+* { 
+    font-family: serif;
+}
+
+#welcomemsg{
+    color: rgb(151, 11, 11);
+    text-align: center;
+}

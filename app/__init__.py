@@ -6,7 +6,7 @@ app = Flask(__name__)
 from config import Config
 
 #define/instantiate our Flask object... aka tell the computer that this is a flask app
-app = Flask(__name__) #instantiating Flask object. Everything we do will be tied to this
+app = Flask(__name__,) #instantiating Flask object. Everything we do will be tied to this
 
 #tell This app how it should be configured -over to the config.py fil to set up for this
 app.config.from_object(Config)

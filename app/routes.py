@@ -13,11 +13,15 @@ from app import app # import the app variable defined in __init__.py
     #if your route's job is to display an html page -> it's return value should be a call to render_template
 
 from flask import render_template
+from random import choice
+
+
 
 @app.route('/') # this decorator says: this is a rounte of the flask app 'app with the url endpoint '/'
 def home():
     headline= 'WELCOME TO THE SHOP OF HORRORS'
-    return render_template('index.html', headline=headline )
+    x = choice(['TODAY IS FOR MURDER', ' TODAY IS FOR MAYHEIM', ' TODAY IS FOR MADNESS', 'TODAY WILL BE BLOODY', 'NOT YOUR LUCKY DAY'])
+    return render_template('index.html', headline=headline, change_heading = x )
 # line 17 associates a python function with a url, the decorator makes the funtion on 18 a
 # flask route and ties it to 
 #the url. when the accesses the url. the python function runs.It returns a call to render template
@@ -34,3 +38,8 @@ def movies():
 def actors():
     headline = 'WELCOME TO THE SHOP OF HORRORS'
     return render_template('actors.html', headline=headline)
+
+#gallary route
+@app.route('/gallary')
+def gallary():
+    return render_template('gallary.html')
