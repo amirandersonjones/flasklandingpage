@@ -13,8 +13,13 @@ from app import app # import the app variable defined in __init__.py
     #if your route's job is to display an html page -> it's return value should be a call to render_template
 
 from flask import render_template
+
+#non-flask import for route functionality
+from .services import getCharacterImages #need to put .services so it wont be looking for a python module. This is a services file and not a python module.
+#.services says "from the services file" rather than "from the services module"
+
 from random import choice
-from services import
+
 
 
 
@@ -40,7 +45,9 @@ def actors():
     headline = 'WELCOME TO THE SHOP OF HORRORS'
     return render_template('actors.html', headline=headline)
 
-#gallary route
+#gallary route/made this new route from the original templates
 @app.route('/gallary')
 def gallary():
-    return render_template('gallary.html')
+    characters= getCharacterImages()
+    print(len(characters))
+    return render_template('gallary.html', characters=characters)

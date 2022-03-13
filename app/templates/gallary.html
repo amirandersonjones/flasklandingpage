@@ -1,6 +1,15 @@
 {% extends 'components/layout.html' %}
-<link rel="stylesheet" href="../static/css/gallary.css">
-{% block content %}
-<h1>some stuff</h1>
+{% block css %}
+<link rel="stylesheet" href="../static/css/gallery.css">
+{% endblock css%}
 
-{% endblock content %}  
+{% block content %}
+<div class="gallery">
+    {% for i in range(9) %}
+      <div class="a{{i}}"><img class="img-fluid" src="{{ characters[i][1] }}" alt="{{ characters[i][0] }}"></div>
+    {% endfor %}
+    <div class="gallerytitle">RICK AND MORTY</div>
+</div>
+{% endblock content %}
+
+
