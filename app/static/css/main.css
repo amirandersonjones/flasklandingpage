@@ -1,6 +1,19 @@
 * { 
     font-family: serif;
+    color: rgb(151, 11, 11);
+    background-color: black;
 }
+
+.nav-link a {
+  text-decoration: none;
+  text-decoration-color: rgb(151, 11, 11);
+}
+.nav-item li{
+  text-decoration-color: rgb(151, 11, 11);
+  display:inline-block;
+  list-style: none;
+  margin-right: 2em;
+  }
 
 #welcomemsg{
     color: rgb(151, 11, 11);
@@ -28,7 +41,7 @@
   .pic2 { grid-area: pic2; }
   
 
-
+  
 
 
 
