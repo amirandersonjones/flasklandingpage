@@ -1,15 +1,25 @@
 {% extends 'components/layout.html' %}
 {% block css %}
 <link rel="stylesheet" href="../static/css/gallery.css">
-{% endblock css%}
+{% endblock css%} 
+
 
 {% block content %}
-<div class="gallery">
-    {% for i in range(9) %}
-      <div class="a{{i}}"><img class="img-fluid" src="{{ characters[i][1] }}" alt="{{ characters[i][0] }}"></div>
-    {% endfor %}
-    <div class="gallerytitle">RICK AND MORTY</div>
+{% for i in range(9) %}
+<div class="card" style="width: 25rem;">
+  <img src="{{ characters[i][1] }}" alt="{{ characters[i][0] }}" class="card-img-top" alt="{{ characters[i][0] }}">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
 </div>
+
+{% endfor %}
 {% endblock content %}
+
+
+
+
+
+
 
 

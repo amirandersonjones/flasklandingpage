@@ -13,6 +13,12 @@ from app import app # import the app variable defined in __init__.py
     #if your route's job is to display an html page -> it's return value should be a call to render_template
 
 from flask import render_template
+from flask import request
+
+from .forms import DriverForm
+from .movieform import MovieForm
+
+#from .forms import DriverForm
 
 #non-flask import for route functionality
 from .services import getCharacterImages #need to put .services so it wont be looking for a python module. This is a services file and not a python module.
@@ -49,5 +55,25 @@ def actors():
 @app.route('/gallary')
 def gallary():
     characters= getCharacterImages()
-    print(len(characters))
+    #print(len(characters))
     return render_template('gallary.html', characters=characters)
+
+# f1 driver info route
+#HTTP-METHODS SPECIFY THE ACCEPTABLE METHODS OF CONNECTION TO THIS ENDPOINT ON OUR SERVER
+    #METHODS DEFAULTS TO JUST GET BUT WE  HAVE GET-USER JUST GETS INFO FROM OUR SITE, POST-SENDING INFO
+    # TO THE USER, PUT-UPDATING INFO ON A SERVER, DELETE-DELETING INFO 
+@app.route('/f1', methods=['GET', 'POST'])
+def f1drivers():
+    form = DriverForm() # this form will be used in both the GET and POST sides of this route
+#     forms = DriverForm()
+#     #Two scenarios here:
+#         #1. user is just accessing this page 
+#             #http method-GET-GETTING DATA FROM THE WEB SERVER
+#         #2. user has submitted the form requesting certain driver information
+#             #http method-POST-SENDING DATA TO THE WEB SERVER
+    return render_template('f1drivers.html', form=form) #works for our GET requests
+#     
+@app.route('/userinterest', methods=['GET', 'POST'])
+def userinterest():
+    movieform = MovieForm()
+    return render_template('userinterest.html', movieform=movieform)

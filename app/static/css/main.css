@@ -1,28 +1,41 @@
 * { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: serif;
+    font-weight: lighter;
     color: rgb(151, 11, 11);
     background-color: black;
 }
 
-.nav-link a {
-  text-decoration: none;
-  text-decoration-color: rgb(151, 11, 11);
+.mynav{
+  padding-top: 0px;
+
 }
-.nav-item li{
-  text-decoration-color: rgb(151, 11, 11);
-  display:inline-block;
-  list-style: none;
-  margin-right: 2em;
-  }
+.headings{
+  color:rgb(151, 11, 11);
+  text-align: center;
+  margin-bottom: 0px;
+  
+}
+
+.listitems{
+  color: rgb(151, 11, 11);
+  text-align:center;
+  margin-bottom: 0px;
+ 
+}
 
 #welcomemsg{
     color: rgb(151, 11, 11);
     text-align: center;
+    margin-bottom: 0px;
 }
 
 
 
 
+/* Grid for index.html*/
 .container {  display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.2fr 1.5fr 1.3fr;
@@ -32,6 +45,7 @@
       "Header-Area"
       "Pic1"
       "pic2";
+    
   }
   
   .Header-Area { grid-area: Header-Area; }
@@ -41,27 +55,64 @@
   .pic2 { grid-area: pic2; }
   
 
+  /*horror.html gallary*/
   
-
-
-
-.container {
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 0.2fr 1.8fr; 
-    gap: 5px 6px; 
-    grid-template-areas: 
-      "Heading-Area Heading-Area"
-      "Column1 Column2"; 
+  .gallary ul{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0vmin;
+    
   }
-  .Heading-Area { grid-area: Heading-Area; }
-  .Column1 { grid-area: Column1; }
-  .Column2 { grid-area: Column2; }
+
+  .gallary li{
+    height: 40vh;
+    flex-grow: 1;
+    margin: 1vmin;
+    list-style: none;
+  }
+  
+img{
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+}
+
+img:hover{
+  filter:blur(1px) grayscale(50%);
+}
+
+@media (max-aspect-ratio: 1/1){
+  .gallary li{
+    height: 50vh;
+  }
+}
+
+@media (max-height: 480px){
+  .gallary li{
+    height: 80vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 1/1) and (max-height: 480px){
+  gallary ul{
+    flex-direction: row;
+  }
+  
+  .gallary li{
+    height: auto;
+    width:100%;
+  }
+  
+  img{
+    width: 100%;
+    max-height: 0;
+    min-width: 0;
+  }
+}
 
 
-
-
-
+/*grid for actors*/
   .container {  display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 0.3fr 1.4fr 1.3fr;
