@@ -1,18 +1,47 @@
-{% extends 'components/layout.html' %} 
+{% extends 'components/layout.html' %}
 
 {% block css %}
-{% endblock css%}
+{% endblock css %}
 
 {% block content %}
-<!---form for the user to request data about a certain movie interest-->
-<div class="col-4">
-    <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+<!-- form for the user to request data about a certain driver -->
+<div class="row justify-content-center">
+    <div class="col-6">
+        <form class="form-inline" method="POST">
+            {{ movieform.hidden_tag() }}
+            <div class="form-group">
+                {{ movieform.moviename(class="mr-3 form-control", placeholder="Movie") }}
+            </div>
+            {{ movieform.submit(class="btn btn-info") }}
+        </form>
+        <small id="driverHelp" class="form-text text-muted">Submit the name of a movie to get its
+            information from the MovieApi.</small>
+    </div>
 </div>
-{% endblock content %} 
+<div class="row justify-content-center">
+    <div class="col-8">
+        {% if movie is string %}
+            <h3>There are no movies here with that name {{ movie }}.</h3>
+        {% elif movie %}
+        <div class="card">
+            <div class="card-header">
+                Movie Information:
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID:<span class='float-right'>{{ driver['permanentNumber'] }} {{ driver['code'] }}</span></li>
+                <li class="list-group-item">First Name:<span class='float-right'>{{ driver['givenName'] }}</span></li>
+                <li class="list-group-item">Last Name:<span class='float-right'>{{ driver['familyName'] }}</span></li>
+                <li class="list-group-item">DOB:<span class='float-right'>{{ driver['dateOfBirth'] }}</span></li>
+                <li class="list-group-item">Nationality:<span class='float-right'>{{ driver['nationality'] }}</span></li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+<!--need to download wtf package and pip freeze

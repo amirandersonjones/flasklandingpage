@@ -12,8 +12,9 @@ from app import app # import the app variable defined in __init__.py
     # 2.) we need the ability to show an html file at a specified url
     #if your route's job is to display an html page -> it's return value should be a call to render_template
 
-from flask import render_template
-from flask import request
+from flask import render_template, request
+import requests
+
 
 from .forms import DriverForm
 from .movieform import MovieForm
@@ -26,7 +27,7 @@ from .services import getCharacterImages #need to put .services so it wont be lo
 
 from random import choice
 
-
+import requests as r
 
 
 @app.route('/') # this decorator says: this is a rounte of the flask app 'app with the url endpoint '/'
@@ -71,9 +72,23 @@ def f1drivers():
 #             #http method-GET-GETTING DATA FROM THE WEB SERVER
 #         #2. user has submitted the form requesting certain driver information
 #             #http method-POST-SENDING DATA TO THE WEB SERVER
+    if request.method == 'Post':
+        #this means the user has submitted the form
+        #two possible behaviors
+            # 1. user provided value form info (aka a real driver name)
+                #make api request and display relevant info
+            # 2. user provided bad form info
+                #redirect them and tell them bad info
+        data = r.get('http://ergast.com/api/f1/drivers/{form.drivername.data}.json').json()
+        print(data)
+                #if the user provides a driver name make an api request and display relevant info
+            #user provided bad information
+                #redirect them and tell them bad info
     return render_template('f1drivers.html', form=form) #works for our GET requests
 #     
 @app.route('/userinterest', methods=['GET', 'POST'])
 def userinterest():
     movieform = MovieForm()
+    if request.method == "Post":
+        print(movieform.moviename.data)
     return render_template('userinterest.html', movieform=movieform)
