@@ -2,7 +2,8 @@
 # We don't need the function call here.
 
 #we must install the requests package in our venv to use it
-
+from re import X
+import requests as r
 from unicodedata import name
 import requests as r
 

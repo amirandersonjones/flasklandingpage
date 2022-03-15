@@ -36,29 +36,34 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for ('f1drivers') }}">F1 Drivers</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for ('userinterest') }}">User Interest</a>
+              <li class="nav-item ml-auto">
+                <a class="nav-link" href="{{ url_for ('auth.signin') }}">Login</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="{{ url_for ('home') }}">Home</a></li>
-                  <li><a class="dropdown-item" href="{{ url_for ('movies') }}">Movies</a></li>
-                  <li><a class="dropdown-item" href="{{ url_for ('actors') }}">Actors</a></li>
-                  <li><a class="dropdown-item" href="{{ url_for ('gallary') }}">Actors</a></li>
-                </ul>
+               
               </li>
             </ul>
           </div>
         </div>
       </nav>
-    <div class="container-fluid">
-      <div class="row mt-2 justify-content-center">
-      {% block content %}
-      {% endblock content %}  
+    <div class="container-fluid mt-2">
+      <div class="row justify-content-center">
+      {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+              </div> 
+    {% block content %}
+    {% endblock content %}  
       </div> 
-    </div>
+    
 </body>
 </html>
