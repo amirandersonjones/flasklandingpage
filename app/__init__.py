@@ -8,8 +8,8 @@ from config import Config
 #import blueprints
 from .auth.routes import auth
 
-#imports for database stuff
-from .models import db
+#imports for database stuff +login manager
+from .models import db, login
 from flask_migrate import Migrate
 
 
@@ -28,7 +28,8 @@ app.register_blueprint(auth)
 # set up our ORM and Migrate connections
 db.init_app(app)
 migrate = Migrate(app, db)
-
+#set up login manager
+login.init_app(app)
 
 #we need to tell the app about any routes or models that exist!
 #import the routes after funciton definition
