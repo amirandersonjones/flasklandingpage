@@ -80,10 +80,13 @@ def f1drivers():
                 #make api request and display relevant info
             # 2. user provided bad form info
                 #redirect them and tell them bad info
-        data = r.get('http://ergast.com/api/f1/drivers/{form.drivername.data}.json').json()
+        print(form.drivername.data)
+        data = r.get(f'http://ergast.com/api/f1/drivers/{form.drivername.data}.json').json()
+        print(data)
         if data['MRData']['total'] !='0':
             # make an api request and display relevant info
             driver = data['MRData']['DriverTable']['Drivers'][0]
+            print(driver)
         else:
             #user provided bad form info
             driver = form.drivername.data

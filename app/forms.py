@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired
 #class for the form describing the form's structure and datatypes
 #this custom class inherits from FlaskForm-it is our customization of the base for structure from Flask_WTF
 class DriverForm(FlaskForm):
-    #having done the inheritance we just need to provide the fiels that this form will show
+    #having done the inheritance we just need to provide the fields that this form will show
     drivername = StringField('Driver Name', validators=[DataRequired()])
     submit = SubmitField()
 

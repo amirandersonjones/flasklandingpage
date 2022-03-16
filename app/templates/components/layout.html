@@ -40,7 +40,15 @@
                 <a class="nav-link" href="{{ url_for ('auth.signin') }}">Login</a>
               </li>
               <li class="nav-item dropdown">
-               
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown link
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="{{ url_for ('home') }}">Home</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for ('movies') }}">Movies</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for ('actors') }}">Actors</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for ('gallary') }}">Rick and Morty Gallary</a></li>
+                </ul>
               </li>
             </ul>
           </div>
