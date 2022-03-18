@@ -35,7 +35,7 @@ def getAnimals():
 
 #route for creating new animal-we are expecting to get some information
 @api.route('/create/animal', methods=['POST'])
-def create_animal():
+def createAnimal():
     """
     [POST] creates a new animal in our database with data provided in the request body
     expected data format JSON
@@ -49,13 +49,29 @@ def create_animal():
         new_animal = Animal(data)
         db.session.add(new_animal)
         db.session.commit()
-        return jsonify({'Created New Animal': new_animal.to_dict()}), 200
+        return jsonify({'Created New Animal': new_animal.to_dict()}), 201
     except:
         return jsonify({'Create Animal Rejected': 'Animal already exists or improper request.'}), 400
     
 #we cant test this create animals route because ['GET'] method doesnt exist for the url
 #create animal only the ['POST']. to test we would have to write the request in python or use an API
 #testing tool
+
+#route for getting one animal-this is going to be a dynamic route/
+# we don't want to create a route for every single animal we want to get.that would be too many routes!
+# this route will expect input coming from through the url
+@api.route('/animal/name/<string:name>', methods=['GET'])
+def getAnimal(name):
+    """
+    [GET] That accepts an animal name through the url and either gets 
+    the appropriate animal from our database or returns that we dont have that animal
+    """
+    a = Animal.query.filter_by(name=name.title()).first()# we use the .title so when the user types in the search by name it will capaitalize and return whether they use lowercase name or uppercase name
+    if a:
+        return jsonify(a.to_dict()), 200
+    else:
+        return jsonify({'Request failed': 'No animal with that name.'}), 404
+
 
 
 #route for updating an animal
@@ -82,7 +98,7 @@ def getMovies():
 
 #route for creating a new movie-we are expecting to get some information
 @api.route('/create/movie', methods=['POST'])
-def create_movie():
+def createMovie():
     #how do we accept request in the body of a post request 
     # depending on how specific we want our data to be - we may want to build out some checks 
     # on the data coming in, does it actually make sense? is it something we want in our database?
@@ -92,11 +108,26 @@ def create_movie():
         new_movie = Movies(data)
         db.session.add(new_movie)
         db.session.commit()
-        return jsonify({'Created New Movie': new_movie.to_dict()}), 200
+        return jsonify({'Created New Movie': new_movie.to_dict()}), 201
     except:
         return jsonify({'Create Movie Rejected': 'Movie already exists or improper request.'}), 400
 
 #route for getting one movie
+#route for getting one animal-this is going to be a dynamic route/
+# we don't want to create a route for every single animal we want to get.that would be too many routes!
+# this route will expect input coming from through the url
+@api.route('/movie/name/<string:name>', methods=['GET'])
+def Movie(name):
+    """
+    [GET] That accepts an animal name through the url and either gets 
+    the appropriate animal from our database or returns that we dont have that animal
+    """
+    m = Movies.query.filter_by(name=name.title()).first()# we use the .title so when the user types in the search by name it will capaitalize and return whether they use lowercase name or uppercase name
+    if m:
+        return jsonify(m.to_dict()), 200
+    else:
+        return jsonify({'Request failed': 'No movies with that name.'}), 404
+
 
 #route for updating a movie
 
