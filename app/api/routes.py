@@ -8,7 +8,7 @@ api = Blueprint('api', __name__, url_prefix='/api')
 #imports for api routes
 from app.models import db, Animal
 from app.models import db, Movies
-
+from .services import token_required
 
 #the decorator belonging to a blueprint starts with @<blueprint_name> rather than @app
 #below is a test route
@@ -35,6 +35,7 @@ def getAnimals():
 
 #route for creating new animal-we are expecting to get some information
 @api.route('/create/animal', methods=['POST'])
+@token_required
 def createAnimal():
     """
     [POST] creates a new animal in our database with data provided in the request body
@@ -75,6 +76,7 @@ def getAnimal(name):
 
 #route for deleting an animal
 @api.route('/animal/remove/<string:id>', methods=['DELETE'])
+@token_required
 def removeAnimal(id):
     """
     [DELETE] accepts an animal ID- if that ID exists in the database, remove that animal from the database
@@ -90,6 +92,7 @@ def removeAnimal(id):
 
 #route for updating an animal
 @api.route('/animal/update/<string:id>', methods=['PUT'])#put is used for updating existing data-just like POST, PUT requests can include data being sent to the web server
+@token_required
 def updateAnimal(id):
     """
     [PUT] accepts an animal ID in the URL and JSON data in the PUT request body in the following format(all values optional)
@@ -143,6 +146,7 @@ def getMovies():
 
 #route for creating a new movie-we are expecting to get some information
 @api.route('/create/movie', methods=['POST'])
+@token_required
 def createMovie():
     #how do we accept request in the body of a post request 
     # depending on how specific we want our data to be - we may want to build out some checks 
@@ -175,6 +179,7 @@ def Movie(name):
 
 #route for deleting a movie
 @api.route('/movie/remove/<string:id>', methods=['DELETE'])
+@token_required
 def removeMovie(id):
     """
     [DELETE] accepts a movie ID-if that ID esists in the database, remove that movie from the database
@@ -222,7 +227,3 @@ def updateMovie(id):
 
 
 
-
-
-
-  

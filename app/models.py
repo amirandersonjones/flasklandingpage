@@ -23,6 +23,7 @@ def load_user(user_id):
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash
 from uuid import uuid4 #the standard normal id a fuction is generated here so we have to string it in our init method
+from secrets import token_hex
 
 #the name of the table
 class User(db.Model, UserMixin):
@@ -36,6 +37,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50))
     password = db.Column(db.String(250), nullable= False)
     date_created = db.Column(db.DateTime, default=datetime.now(timezone.utc)) #have to import from datetime import datetime, timezone
+    api_token = db.Column(db.String(32))
 
 #The plan for this model is:
 #User model plan:
@@ -57,7 +59,9 @@ class User(db.Model, UserMixin):
         self.last_name = last_name
         self.password = generate_password_hash(password) #call it in from the password put in the form.before the password ever hits the database it will already be salted and hashed
         self.id = str(uuid4())
-
+    
+    def generate_token(self):
+        self.api_token = token_hex(16)
 #Login Manager:
 #installing flask-login(import the stances as well)(go to init.py import login manager and initialize)
 #incorporating flask-login with our app
@@ -192,7 +196,8 @@ class Movies(db.Model):
      box_office = db.Column(db.Integer)
      director = db.Column(db.String(100))
      price = db.Column(db.Float(2), nullable=False)
-     
+    
+
      def __init__(self, dict):
          
         self.id = str(uuid4())
@@ -203,6 +208,9 @@ class Movies(db.Model):
         self.rating = dict.get('rating')
         self.box_office = dict.get('box_office')
         self.director = dict.get('director').title()
+    
+     def generate_token(self):
+        self.api_token = token_hex(16)
         
      def to_dict(self):
         return{
