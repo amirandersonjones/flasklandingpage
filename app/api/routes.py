@@ -73,10 +73,21 @@ def getAnimal(name):
         return jsonify({'Request failed': 'No animal with that name.'}), 404
 
 
+#route for deleting an animal
+@api.route('/animal/remove/<string:id>', methods=['DELETE'])
+def removeAnimal(id):
+    #if the animal is present in the database say so, and remove
+    animal = Animal.query.get(id)
+    if not animal: #if no animal with that id is in the database
+        #tell the user remove failed
+        return jsonify({'Remove failed':'No animal of that ID exists in the database'}), 404
+    db.session.delete(animal)
+    db.session.commit()
+    return jsonify({'Removed animal': animal.to_dict()}), 200
 
 #route for updating an animal
 
-#route for deleting an animal
+
 
 
 
@@ -112,7 +123,7 @@ def createMovie():
     except:
         return jsonify({'Create Movie Rejected': 'Movie already exists or improper request.'}), 400
 
-#route for getting one movie
+#route for getting one movie#route for getting a subset of data on movies
 #route for getting one animal-this is going to be a dynamic route/
 # we don't want to create a route for every single animal we want to get.that would be too many routes!
 # this route will expect input coming from through the url
@@ -128,13 +139,24 @@ def Movie(name):
     else:
         return jsonify({'Request failed': 'No movies with that name.'}), 404
 
+#route for deleting a movie
+@api.route('/movie/remove/<string:id>', methods=['DELETE'])
+def removeMovie(id):
+    #if the movie is present in the database say so, and remove
+    movie = Movies.query.get(id)
+    if not movie: #if no movie with that id is in the database
+        #tell the user remove failed
+        return jsonify({'Remove failed':'No movie of that ID exists in the database'}), 404
+    db.session.delete(movie)
+    db.session.commit()
+    return jsonify({'Removed movie': movie.to_dict()}), 200
 
 #route for updating a movie
 
-#route for deleting a movie
 
-#route for getting a subset of data on movies
 
-#route for creating a new movie
+
+
+
 
   
