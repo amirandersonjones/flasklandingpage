@@ -163,7 +163,7 @@ class Movies(db.Model):
      price = db.Column(db.Float(2), nullable=False)
      
      def __init__(self, dict):
-       
+         
         self.id = str(uuid4())
         self.name = dict['name'].title()
         self.category = dict['category']
