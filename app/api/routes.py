@@ -76,6 +76,9 @@ def getAnimal(name):
 #route for deleting an animal
 @api.route('/animal/remove/<string:id>', methods=['DELETE'])
 def removeAnimal(id):
+    """
+    [DELETE] accepts an animal ID- if that ID exists in the database, remove that animal from the database
+    """
     #if the animal is present in the database say so, and remove
     animal = Animal.query.get(id)
     if not animal: #if no animal with that id is in the database
@@ -86,6 +89,37 @@ def removeAnimal(id):
     return jsonify({'Removed animal': animal.to_dict()}), 200
 
 #route for updating an animal
+@api.route('/animal/update/<string:id>', methods=['PUT'])#put is used for updating existing data-just like POST, PUT requests can include data being sent to the web server
+def updateAnimal(id):
+    """
+    [PUT] accepts an animal ID in the URL and JSON data in the PUT request body in the following format(all values optional)
+        {
+            'name': <str>,
+            'sci_name: <str>,
+            'description': <str>,
+            'price': <float>,
+            'image': <str>
+            ###rest of k:v pairs optional
+            'size': <str>,
+            'weight': <int>,
+            'diet': <str>,
+            'habitat': <str>,
+            'lifespan': <int>
+        }
+    """
+    try:
+        #grab the request body and query the database for an animal with that ID
+        animal = Animal.query.get(id)
+        data = request.get_json()
+        #then update animal object.The dictionary coming in will only have coming in what we 
+        # want to change. Have to make a change to our model. We need to make a reverse of our
+        #to_dict model called a from_dict method
+        animal.from_dict(data)#rewrite yourself from this dictionary function we created
+        #and recommit it to the database aka it already exists in the database so in this case it is just saveing the changes
+        db.session.commit()
+        return jsonify({'Updated animal': animal.to_dict()}), 200
+    except:
+        return jsonify({'Request failed': 'invalid body or animal ID'}), 400
 
 
 
@@ -142,6 +176,9 @@ def Movie(name):
 #route for deleting a movie
 @api.route('/movie/remove/<string:id>', methods=['DELETE'])
 def removeMovie(id):
+    """
+    [DELETE] accepts a movie ID-if that ID esists in the database, remove that movie from the database
+    """
     #if the movie is present in the database say so, and remove
     movie = Movies.query.get(id)
     if not movie: #if no movie with that id is in the database
@@ -153,6 +190,35 @@ def removeMovie(id):
 
 #route for updating a movie
 
+@api.route('/movie/update/<string:id>', methods=['PUT'])#put is used for updating existing data-just like POST, PUT requests can include data being sent to the web server
+def updateMovie(id):
+    """
+    [PUT] accepts a movie ID in the URL and JSON data in the PUT request body in the following format(all values optional)
+        {
+            'name': <str>,
+            'category': <str>,
+            'price': <float>,
+            'image': <str>
+            ###rest of k:v pairs optional
+            'rating': <str>,
+            'box_office': <int>,
+            'director': <str>,
+            
+        }
+    """
+    try:
+        #grab the request body and query the database for a movie with that ID
+        movie = Movies.query.get(id)
+        data = request.get_json()
+        #then update movie object.The dictionary coming in will only have coming in what we 
+        # want to change. Have to make a change to our model. We need to make a reverse of our
+        #to_dict model called a from_dict method
+        movie.from_dict(data)#rewrite yourself from this dictionary function we created
+        #and recommit it to the database aka it already exists in the database so in this case it is just saveing the changes
+        db.session.commit()
+        return jsonify({'Updated animal': movie.to_dict()}), 200
+    except:
+        return jsonify({'Request failed': 'invalid body or movie ID'}), 400
 
 
 

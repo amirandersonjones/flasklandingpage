@@ -79,6 +79,36 @@ class Animal(db.Model):
     image = db.Column(db.String(150), nullable=True)#not a good idea to store this image in here unless you use no sql.
     price = db.Column(db.Float(2), nullable=False)
 
+    def from_dict(self, dict):
+        """
+        works for the updateAnimal route-accepts the dictionary provided by the request and updates the animal with any present keys
+        """
+        if dict.get('name'):
+            self.name = dict['name'].title()
+        if dict.get('sci_name'):
+            self.sci_name = dict['sci_name'].title()
+        if dict.get('image'):
+            self.image = dict['image']
+        if dict.get('price'):
+            self.price = dict['price']
+        if dict.get('size'):
+            self.size = dict['size']
+        if dict.get('diet'):
+            self.diet = dict['diet']
+        if dict.get('weight'):
+            self.weight = dict['weight']
+        if dict.get('habitat'):
+            self.habitat = dict['habitat']
+        if dict.get('lifespan'):
+            self.lifespan = dict['lifespan']
+        if dict.get('description'):
+            self.description = dict['description']
+        
+        
+        
+      
+        
+
 #the init for this is going to be different than the other table for the user because we
 #are going to let some users create new data in our database and create a new animal(the user will be sending
 # the 'POST' request in Json formatt to our system which translates into a python dictionary). Therefore,
@@ -132,6 +162,7 @@ class Animal(db.Model):
             'weight': self.weight,
             'diet': self.diet,
             'habitat': self.habitat,
+            'description': self.description,
             'lifespan': self.lifespan
             }
 #update my database to have this model
@@ -184,7 +215,21 @@ class Movies(db.Model):
             'box_office': self.box_office,
             'director': self.director
             }
-    
-        
-      
-        
+     def from_dict(self, dict):
+        """
+        works for the updateMovie route-accepts the dictionary provided by the request and updates the movie with any present keys
+        """
+        if dict.get('name'):
+            self.name = dict['name'].title()
+        if dict.get('category'):
+            self.category = dict['category']
+        if dict.get('price'):
+            self.price = dict['price']
+        if dict.get('image'):
+            self.image = dict['image']
+        if dict.get('rating'):
+            self.rating = dict['rating']
+        if dict.get('box_office'):
+            self.box_office = dict['box_office']
+     
+     
