@@ -7,6 +7,7 @@ from config import Config
 
 #import blueprints
 from .auth.routes import auth
+from .api.routes import api
 
 #imports for database stuff +login manager
 from .models import db, login
@@ -24,12 +25,18 @@ app.config.from_object(Config)
 #create a link of communication between blueprints and app
 #aka register the blueprints
 app.register_blueprint(auth)
+app.register_blueprint(api)
+
 
 # set up our ORM and Migrate connections
 db.init_app(app)
 migrate = Migrate(app, db)
+
 #set up login manager
 login.init_app(app)
+login.login_view = 'auth.signin'
+login.login_message = 'Please sign in to see this page.'
+login.login_message_category = 'danger'
 
 #we need to tell the app about any routes or models that exist!
 #import the routes after funciton definition

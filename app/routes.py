@@ -8,6 +8,7 @@
 #our first route:
 #goal display the index.html file when user navigates to the base url aka http://127.0.0.1:5000/ 
     # 1.)we need access to our app
+from flask_login import login_required
 from app import app # import the app variable defined in __init__.py
     # 2.) we need the ability to show an html file at a specified url
     #if your route's job is to display an html page -> it's return value should be a call to render_template
@@ -55,6 +56,7 @@ def actors():
 
 #gallary route/made this new route from the original templates
 @app.route('/gallary')
+
 def gallary():
     characters= getCharacterImages()
     #print(len(characters))
@@ -65,6 +67,7 @@ def gallary():
     #METHODS DEFAULTS TO JUST GET BUT WE  HAVE GET-USER JUST GETS INFO FROM OUR SITE, POST-SENDING INFO
     # TO THE USER, PUT-UPDATING INFO ON A SERVER, DELETE-DELETING INFO 
 @app.route('/f1', methods=['GET', 'POST'])
+
 def f1drivers():
     form = DriverForm() # this form will be used in both the GET and POST sides of this route
 #     forms = DriverForm()
